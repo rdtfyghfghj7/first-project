@@ -1,24 +1,14 @@
-function exist(board, word) {
-  const rows = board.length;
-  const cols = board[0].length;
-  const dfs = (i, j, index) => {
-    if (index === word.length) return true;
-    if (i < 0 || i >= rows || j < 0 || j >= cols || board[i][j] !== word[index])
-      return false;
-    const temp = board[i][j];
-    board[i][j] = "";
-    const found =
-      dfs(i + 1, j, index + 1) ||
-      dfs(i - 1, j, index + 1) ||
-      dfs(i, j + 1, index + 1) ||
-      dfs(i, j - 1, index + 1);
-    board[i][j] = temp;
-    return found;
-  };
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      if (board[i][j] === word[0] && dfs(i, j, 0)) return true;
+function rob(nums) {
+  if (nums.length === 1) return nums[0];
+  const robRange = (start, end) => {
+    let prevMax = 0;
+    let currMax = 0;
+    for (let i = start; i <= end; i++) {
+      const temp = currMax;
+      currMax = Math.max(currMax, prevMax + nums[i]);
+      prevMax = temp;
     }
-  }
-  return false;
+    return currMax;
+  };
+  return Math.max(robRange(0, nums.length - 2), robRange(1, nums.length - 1));
 }
