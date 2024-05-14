@@ -1,10 +1,2 @@
-function rob(nums) {
-  let prevMax = 0;
-  let currMax = 0;
-  for (const num of nums) {
-    const temp = currMax;
-    currMax = Math.max(prevMax + num, currMax);
-    prevMax = temp;
-  }
-  return currMax;
-}
+const currentDate = new Date();
+console.log(currentDate); // Fri 2024-04-05T09:17:00.000Z
